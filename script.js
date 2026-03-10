@@ -26,6 +26,19 @@
     });
   }
 
+  function closeSearch() {
+    if (headerSearch) headerSearch.classList.remove('is-open');
+    if (searchToggle) {
+      searchToggle.setAttribute('aria-expanded', 'false');
+      searchToggle.setAttribute('aria-label', 'Open search');
+    }
+    if (headerSearch) headerSearch.setAttribute('aria-hidden', 'true');
+    if (searchInput) {
+      searchInput.blur();
+      searchInput.value = '';
+    }
+  }
+
   if (searchToggle && headerSearch && searchInput) {
     searchToggle.addEventListener('click', function () {
       const isOpen = headerSearch.classList.toggle('is-open');
@@ -40,4 +53,11 @@
       }
     });
   }
+
+  const searchDropdownItems = document.querySelectorAll('.search-dropdown-item');
+  searchDropdownItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      closeSearch();
+    });
+  });
 })();
